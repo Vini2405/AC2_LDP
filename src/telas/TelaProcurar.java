@@ -41,9 +41,9 @@ public class TelaProcurar extends JFrame {
                 + "CPF = '" + cpf + "'"
                 + ";";
         
-        if (txtCpf.getText() == null || txtCpf.getText().isBlank()){
+        if (cpf == null || cpf.isBlank() || cpf.equals("   .   .   -  ")){
             JOptionPane.showMessageDialog(this,
-                    "Por favor, insira o CPF do cliente desejado. Todos os campos são obrigatórios!",
+                    "Por favor, insira o CPF do cliente desejado.",
                     "Informações obrigatórias não preenchidas", JOptionPane.ERROR_MESSAGE);          
         } else{
             try {
@@ -87,6 +87,19 @@ public class TelaProcurar extends JFrame {
                 "DELETE FROM cliente "
                 + "WHERE "
                 + "cpf = '" + cpf + "';";
+        
+        if (txtNome.getText() == null || txtNome.getText().isBlank() ||
+            txtCpf.getText() == null || txtCpf.getText().isBlank() ||
+            txtTelefone.getText() == null || txtTelefone.getText().isBlank() ||
+            txtCidade.getText() == null || txtCidade.getText().isBlank() ||
+            txtUf.getText() == null || txtUf.getText().isBlank() ||
+            txtEmail.getText() == null || txtEmail.getText().isBlank()){
+                
+            JOptionPane.showMessageDialog(this,
+                    "Há informações faltando ou nenhum cliente foi selecionado.",
+                    "Informações Incorretas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         try{
             conexao.updateSQL(deletar_dado);            
